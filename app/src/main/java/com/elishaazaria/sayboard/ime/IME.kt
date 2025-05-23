@@ -79,9 +79,9 @@ class IME : InputMethodService(), ModelManager.Listener {
 
         textManager = TextManager(this, modelManager)
 
-        viewManager.recordDevice.observe(lifecycleOwner) {
-            modelManager.recordDevice = it
-        }
+        // viewManager.recordDevice.observe(lifecycleOwner) { // Commented out: recordDevice is not used in ViewManager anymore
+        //     modelManager.recordDevice = it // Commented out: recordDevice is not used in ViewManager anymore
+        // }
     }
 
     /**
@@ -262,9 +262,9 @@ class IME : InputMethodService(), ModelManager.Listener {
             textManager.onText(text, TextManager.Mode.INSERT)
         }
 
-        override fun deviceChanged(device: AudioDeviceInfo) {
-            modelManager.recordDevice = device
-        }
+        // override fun deviceChanged(device: AudioDeviceInfo) { // Commented out: deviceChanged is not in ViewManager.Listener anymore
+        //     modelManager.recordDevice = device // Commented out: recordDevice is not used in ViewManager anymore
+        // }
     }
 
     /**
