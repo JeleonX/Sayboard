@@ -55,14 +55,14 @@
     <string name="notification_download_content_finished">下載完畢！</string>
     <string name="title_models">模型</string>
     <string name="keyboard_keys_right_title">右邊按鍵</string>
-    <string name="mic_info_recording">說點什麼吧</string>
+    <string name="mic_info_recording">聆聽中...</string>
     <string name="logic_logic_header">邏輯</string>
     <string name="mic_error_no_permission">未授予麥克風存取權！</string>
     <string name="button_select">選取</string>
     <string name="models_download_state">狀態: %s</string>
     <string name="ui_dark_theme_background_color_title">背景顏色</string>
     <string name="p_keep_screen_awake_mode_when_open">開啟時</string>
-    <string name="mic_info_ready">已就緒</string>
+    <string name="mic_info_ready">請點擊說話</string>
     <string name="logic_keep_model_in_ram_title">將模型保留在 RAM 中（關閉時）</string>
     <string name="keyboard_keys_dialog_key_label_label">標籤</string>
     <string name="ui_light_theme_header">淺色主題</string>
