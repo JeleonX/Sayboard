@@ -53,7 +53,7 @@
     <string name="models_import_dialog_title">导入模型</string>
     <string name="keyboard_not_enabled">启用键盘</string>
     <string name="keyboard_keys_right_title">右键</string>
-    <string name="mic_info_recording">说点什么吧</string>
+    <string name="mic_info_recording">聆听中...</string>
     <string name="notification_download_content_finished">下载已完成！</string>
     <string name="title_models">模型</string>
     <string name="logic_logic_header">Logic</string>
@@ -62,7 +62,7 @@
     <string name="models_download_state">状态：%s</string>
     <string name="ui_dark_theme_background_color_title">背景色</string>
     <string name="p_keep_screen_awake_mode_when_open">打开时</string>
-    <string name="mic_info_ready">已就绪</string>
+    <string name="mic_info_ready">请点击说话</string>
     <string name="logic_keep_model_in_ram_title">将模型保持在内存中（当关闭时）</string>
     <string name="keyboard_keys_dialog_key_label_label">标签</string>
     <string name="ui_light_theme_header">浅色主题</string>
