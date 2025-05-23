@@ -101,9 +101,9 @@ class ViewManager(private val ime: Context) : AbstractComposeView(ime),
     val recognizerNameLD = MutableLiveData("")
     val enterActionLD = MutableLiveData(EditorInfo.IME_ACTION_UNSPECIFIED)
 
-    val recordDevice: MutableLiveData<AudioDeviceInfo?> = MutableLiveData()
+    // val recordDevice: MutableLiveData<AudioDeviceInfo?> = MutableLiveData() // Commented out: Not needed for UI if device selection is removed
 
-    private var devices: List<AudioDeviceInfo> = listOf()
+    // private var devices: List<AudioDeviceInfo> = listOf() // Commented out: Not needed for UI if device selection is removed
 
     init {
         layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
@@ -120,8 +120,8 @@ class ViewManager(private val ime: Context) : AbstractComposeView(ime),
                 Configuration.ORIENTATION_LANDSCAPE -> prefs.keyboardHeightLandscape.get()
                 else -> prefs.keyboardHeightPortrait.get()
             }).toInt().dp
-        var showDevicesPopup by remember { mutableStateOf(false) }
-        val recordDeviceS by recordDevice.observeAsState()
+        // var showDevicesPopup by remember { mutableStateOf(false) } // Commented out: Not needed if device selection popup is removed
+        // val recordDeviceS by recordDevice.observeAsState() // Commented out: Not needed for UI if device selection is removed
 
         IMETheme(prefs) {
             CompositionLocalProvider(
@@ -274,21 +274,21 @@ class ViewManager(private val ime: Context) : AbstractComposeView(ime),
                                 }
                             }
                             Spacer(modifier = Modifier.weight(1f))
-                            IconButton(onClick = {
-                                devices = AudioDevices.validAudioDevices(ime)
-                                showDevicesPopup = true
-                            }) {
-                                Icon(
-                                    imageVector = when (recordDeviceS?.type) {
-                                        AudioDeviceInfo.TYPE_BUILTIN_MIC -> Icons.Default.PhoneAndroid
-                                        AudioDeviceInfo.TYPE_WIRED_HEADSET -> Icons.Default.HeadsetMic
-                                        AudioDeviceInfo.TYPE_BLE_HEADSET -> Icons.Default.Bluetooth
-                                        AudioDeviceInfo.TYPE_USB_HEADSET -> Icons.Default.MicExternalOn
-                                        else -> Icons.Default.PhoneAndroid
-                                    },
-                                    contentDescription = null,
-                                )
-                            }
+                            // IconButton(onClick = { // Commented out: Audio device selection button
+                            //     devices = AudioDevices.validAudioDevices(ime)
+                            //     showDevicesPopup = true
+                            // }) {
+                            //     Icon(
+                            //         imageVector = when (recordDeviceS?.type) {
+                            //             AudioDeviceInfo.TYPE_BUILTIN_MIC -> Icons.Default.PhoneAndroid
+                            //             AudioDeviceInfo.TYPE_WIRED_HEADSET -> Icons.Default.HeadsetMic
+                            //             AudioDeviceInfo.TYPE_BLE_HEADSET -> Icons.Default.Bluetooth
+                            //             AudioDeviceInfo.TYPE_USB_HEADSET -> Icons.Default.MicExternalOn
+                            //             else -> Icons.Default.PhoneAndroid
+                            //         },
+                            //         contentDescription = null,
+                            //     )
+                            // } // Commented out: End of Audio device selection button
                             Spacer(modifier = Modifier.weight(1f))
                             IconButton(onClick = { listener?.returnClicked() }) {
                                 val enterAction by enterActionLD.observeAsState()
@@ -306,70 +306,70 @@ class ViewManager(private val ime: Context) : AbstractComposeView(ime),
                             }
                         }
                     }
-                    if (showDevicesPopup) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(MaterialTheme.colors.background.copy(0.5f))
-                                .clickable { showDevicesPopup = false },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxSize(0.9f)
-                                    .background(MaterialTheme.colors.onSurface.copy(0.1f))
-                            ) {
-                                Column {
-                                    Text("Audio Source", modifier = Modifier.padding(10.dp))
-
-                                    LazyColumn(
-                                        verticalArrangement = Arrangement.spacedBy(10.dp),
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .weight(1f)
-                                    ) {
-                                        items(devices) { device ->
-                                            Card(
-                                                onClick = {
-                                                    showDevicesPopup = false
-                                                    recordDevice.postValue(device)
-                                                },
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                            ) {
-                                                Row(
-                                                    modifier = Modifier
-                                                        .background(
-                                                            MaterialTheme.colors.onSurface.copy(
-                                                                0.2f
-                                                            )
-                                                        )
-                                                        .padding(10.dp)
-                                                ) {
-                                                    Icon(
-                                                        imageVector = when (device.type) {
-                                                            AudioDeviceInfo.TYPE_BUILTIN_MIC -> Icons.Default.PhoneAndroid
-                                                            AudioDeviceInfo.TYPE_WIRED_HEADSET -> Icons.Default.HeadsetMic
-                                                            AudioDeviceInfo.TYPE_BLE_HEADSET -> Icons.Default.Bluetooth
-                                                            AudioDeviceInfo.TYPE_USB_HEADSET -> Icons.Default.MicExternalOn
-                                                            else -> Icons.Default.PhoneAndroid
-                                                        },
-                                                        contentDescription = null,
-                                                    )
-                                                    Spacer(modifier = Modifier.width(10.dp))
-                                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && device.address.isNotBlank()) {
-                                                        Text("${device.productName} (${device.address})")
-                                                    } else {
-                                                        Text("${device.productName}")
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    // if (showDevicesPopup) { // Commented out: Audio device selection popup
+                    //     Box(
+                    //         modifier = Modifier
+                    //             .fillMaxSize()
+                    //             .background(MaterialTheme.colors.background.copy(0.5f))
+                    //             .clickable { showDevicesPopup = false },
+                    //         contentAlignment = Alignment.Center
+                    //     ) {
+                    //         Box(
+                    //             modifier = Modifier
+                    //                 .fillMaxSize(0.9f)
+                    //                 .background(MaterialTheme.colors.onSurface.copy(0.1f))
+                    //         ) {
+                    //             Column {
+                    //                 Text("Audio Source", modifier = Modifier.padding(10.dp))
+                    //
+                    //                 LazyColumn(
+                    //                     verticalArrangement = Arrangement.spacedBy(10.dp),
+                    //                     modifier = Modifier
+                    //                         .fillMaxWidth()
+                    //                         .weight(1f)
+                    //                 ) {
+                    //                     items(devices) { device ->
+                    //                         Card(
+                    //                             onClick = {
+                    //                                 showDevicesPopup = false
+                    //                                 recordDevice.postValue(device)
+                    //                             },
+                    //                             modifier = Modifier
+                    //                                 .fillMaxWidth()
+                    //                         ) {
+                    //                             Row(
+                    //                                 modifier = Modifier
+                    //                                     .background(
+                    //                                         MaterialTheme.colors.onSurface.copy(
+                    //                                             0.2f
+                    //                                         )
+                    //                                     )
+                    //                                     .padding(10.dp)
+                    //                             ) {
+                    //                                 Icon(
+                    //                                     imageVector = when (device.type) {
+                    //                                         AudioDeviceInfo.TYPE_BUILTIN_MIC -> Icons.Default.PhoneAndroid
+                    //                                         AudioDeviceInfo.TYPE_WIRED_HEADSET -> Icons.Default.HeadsetMic
+                    //                                         AudioDeviceInfo.TYPE_BLE_HEADSET -> Icons.Default.Bluetooth
+                    //                                         AudioDeviceInfo.TYPE_USB_HEADSET -> Icons.Default.MicExternalOn
+                    //                                         else -> Icons.Default.PhoneAndroid
+                    //                                     },
+                    //                                     contentDescription = null,
+                    //                                 )
+                    //                                 Spacer(modifier = Modifier.width(10.dp))
+                    //                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P && device.address.isNotBlank()) {
+                    //                                     Text("${device.productName} (${device.address})")
+                    //                                 } else {
+                    //                                     Text("${device.productName}")
+                    //                                 }
+                    //                             }
+                    //                         }
+                    //                     }
+                    //                 }
+                    //             }
+                    //         }
+                    //     }
+                    // } // Commented out: End of Audio device selection popup
                 }
             }
         }
@@ -402,7 +402,7 @@ class ViewManager(private val ime: Context) : AbstractComposeView(ime),
         fun modelClicked()
         fun settingsClicked()
         fun buttonClicked(text: String)
-        fun deviceChanged(device: AudioDeviceInfo)
+        // fun deviceChanged(device: AudioDeviceInfo) // Commented out: Not needed if device selection is removed
     }
 
     companion object {
